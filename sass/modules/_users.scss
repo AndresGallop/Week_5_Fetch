@@ -1,0 +1,11 @@
+.user-section {
+    display: flex;
+}
+
+.user { 
+    flex: 1;
+    @include addPadding(10px);
+
+    .user-name, .user-nickname, .user-role { margin: 0; }
+
+}
