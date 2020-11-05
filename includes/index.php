@@ -1,10 +1,20 @@
 <?php
-    require('functions.php');
+    include("connect.php");
+    include("functions.php");
 
-    if (isset($_GET['user'])) {
-        $user = getSingleUser($pdo);
+    //if we need one piece, run a getOne function
+
+    //else get all the pieces
+
+    if (isset($_GET["id"])) {
+        //get one item from the database - whichever one you clicked on and asked for in the UI
+        $targetID = $_GET["id"];
+        $result = getSingleUser($pdo, $targetID);
+
+        return $result;
     } else {
-        $user = getAllUser($pdo);
-    }
+        //user must want to see all items in the database
+        $allUsers = getAllUsers($pdo) ;
 
-    echo json_encode($user);
+        return $allUsers;
+    }
