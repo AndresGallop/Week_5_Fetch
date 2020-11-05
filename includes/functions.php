@@ -1,20 +1,31 @@
 <?php
-    require('connect.php');
 
-    function getAllUsers($conn) {
-        $getUsers = 'SELECT * FROM users';
-        $runQuery = $conn->query($getUsers);
+    $result = array();
 
-        $result = array();
+    function getAllUsers($conn)
+    {
+        $query = "SELECT * FROM profdata";
 
-        while($row = $runQuery->fetch(PDO::FETCH_ASSOC)) {
-            // push each row of data into our arry to make it easy to iterate over
+        $runQuery = $conn->query($query);
+
+        while ($row = $runQuery->fetchAll(PDO::FETCH_ASSOC)) {
             $result[] = $row;
         }
 
-        return $result;
+        //return $result;
+        echo(json_encode($result));
     }
 
-    function getSingleUser($conn) {
-        // run same query with a where clause
+    function getSingleUser($conn, $id)
+    {
+        $query = "SELECT * FROM profdata WHERE id=" . $id . "";
+
+        $runQuery = $conn->query($query);
+
+        while ($row = $runQuery->fetchAll(PDO::FETCH_ASSOC)) {
+            $result[] = $row;
+        }
+
+        //return $result;
+        echo(json_encode($result));
     }
