@@ -17,7 +17,7 @@ import { fetchData } from "./modules/DataMiner.js";
         // because it will break (the PHP will choke)
         if (!event.target.id) {return}
 
-        fetchData(`./includes/index.php?id=${event.target.id}`).then(data => console.log(data)).catch(err => console.log(err));
+        fetchData(`./includes/index.php?id=${event.target.id}`).then(data => showtext(data)).catch(err => console.log(err));
     }
 
     function renderPortfolioThumbnails(thumbs) {
@@ -32,22 +32,16 @@ import { fetchData } from "./modules/DataMiner.js";
                 currentUserText = currentUser.querySelector('.user').children;
                 let usuario = document.querySelectorAll(".user");
 
-                
+                debugger;
 
             currentUserText[1].src = `images/${thumbs[user].avatar}`; 
             currentUserText[1].id = thumbs[user].id;  // Esta mierda es para obtener los datos (se ven en la consola), no se ven en la pantalla.
 
-            currentUserText[2].innerHTML = `${thumbs[user].name}`;
-            currentUserText[3].innerHTML = `${thumbs[user].nickname}`;
-            currentUserText[4].innerHTML = `${thumbs[user].role}`;
+            // currentUserText[2].innerHTML = `${thumbs[user].name}`;
+            // currentUserText[3].innerHTML = `${thumbs[user].nickname}`;
+            // currentUserText[4].innerHTML = `${thumbs[user].role}`;
 
-            function showtext(){
-                    
-                currentUserText[2].classList.toggle('show-name');
-                currentUserText[3].classList.toggle('show-nickname');
-                currentUserText[4].classList.toggle('show-role');
-            }
-                usuario.forEach(useri =>useri.addEventListener("click", showtext)); 
+             
 
         
             // add this new user to the view
@@ -57,6 +51,17 @@ import { fetchData } from "./modules/DataMiner.js";
         userSection.addEventListener("click", retrieveProjectInfo);   
           
 
+    }
+
+    function showtext(person){
+                    debugger;
+        currentUserText[2].innerHTML = person[0].name;  
+        currentUserText[3].innerHTML = person[0].nickname;
+        currentUserText[4].innerHTML = person[0].role;
+
+        currentUserText[2].classList.toggle('show-name');
+        currentUserText[3].classList.toggle('show-nickname');  // TREVOR - I need to find out how to indicate JS that I want this function
+        currentUserText[4].classList.toggle('show-role');      // to happen in the selected user. I tried ${this} but did not work.
     }
     // function showtext(){
 
