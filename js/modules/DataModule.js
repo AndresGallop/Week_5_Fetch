@@ -8,7 +8,7 @@ export default {
     John: {
         name: "John",
         role: "super chill prof",
-        nickname: "just john"
+        nickname: "just john" 
     },
 
     Joe: {
