@@ -1,1 +1,20 @@
-    
+    .lightbox {
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        height: 100vh; //might need to be 100%
+        color: lightgrey;
+        background-color: rgba(0,0,0,0.8);
+        display: none;
+
+        .close-button { 
+            float: right; 
+            font-size: 2em; 
+            cursor: pointer; 
+            padding-right: 1em;}
+    }
+
+    //looks good to me! let's check it out
+
+    // turn the lightbox on when we have some content to show
+    .show-lightbox{ display: block;}
