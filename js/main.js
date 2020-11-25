@@ -1,4 +1,4 @@
-import { fetchData } from "./modules/DataMiner.js";
+import { fetchData } from "./modules/DataMiner.js"; 
 
 (() => {
 
@@ -7,9 +7,26 @@ import { fetchData } from "./modules/DataMiner.js";
     console.log('loaded');
 
     // this receives the data payload from our AJAX request, parses it (turns the returned JSON object back into a plain JavaScript object) and renders the data to our view (the markup in index.html)
-    //  function handleDataSet(thumbs) {
-            
-    //  }
+     function openLightbox(data) {
+         // populate a lightbox with this data
+         // and then open it
+         let lightbox = document.querySelector(".lightbox"),
+             closeButton = lightbox.querySelector('span');
+
+         closeButton.addEventListener("click", ()=> {lightbox.classList.remove('show-lightbox')});
+
+         lightbox.classList.add('show-lightbox');
+         // lightbox should open but nothing inside yet
+         lightbox.querySelector('img').src = `images/${data[0].avatar}`;
+         lightbox.querySelector('h3').textContent = data[0].name;
+         lightbox.querySelector('p').textContent = data[0].role;
+
+         // testify!
+         // so that's it! you would style your lightbox items however you like!
+         // retrieve the info a click, and just change their contents to reflect that data
+         // NO TEMPLATES, JUST WIRE IT ALL UP DIRECTLY
+    
+        }
 
     function retrieveProjectInfo(event){
         //test for an ID
@@ -19,6 +36,8 @@ import { fetchData } from "./modules/DataMiner.js";
 
         let userPieces = event.target.parentElement.children;
 
+        // need to write some lightbox functionality here - pass the data into that function and then show it
+        fetchData(`./includes/index.php?id=${event.target.id}`).then(data => openLightbox(data)).catch(err => console.log(err));
         fetchData(`./includes/index.php?id=${event.target.id}`).then(data => showtext(data, userPieces)).catch(err => console.log(err));
     }
 
